@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const slideIndex = e.target.getAttribute('data-slide-to');
 
     slideNum = slideIndex;
-    offset = +width.slice(0, width.length - 2) * (slideNum - 1);
+    offset = getWidthSlide(width) * (slideNum - 1);
 
     slidesField.style.transform = `translateX(-${offset}px)`;
     
@@ -63,15 +63,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const slideCounter = (element, count) =>
     (element.textContent = count >= 10 ? `${count}` : `0${count}`);
+  
+  const getWidthSlide = str => +str.replace(/[^\d.]/g, '');
 
   btNext.addEventListener('click', () => {
     slideNum++;
 
-    if (offset === +width.slice(0, width.length - 2) * (numSlides - 1)) {
+    if (offset === getWidthSlide(width) * (numSlides - 1)) {
       offset = 0;
       slideNum = 1;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += getWidthSlide(width);
     }
 
     changeOpacity(slideNum);
@@ -85,10 +87,10 @@ window.addEventListener('DOMContentLoaded', () => {
     slideNum--;
 
     if (offset === 0) {
-      offset = +width.slice(0, width.length - 2) * (numSlides - 1);
+      offset = getWidthSlide(width) * (numSlides - 1);
       slideNum = numSlides;
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= getWidthSlide(width);
     }
 
     changeOpacity(slideNum);

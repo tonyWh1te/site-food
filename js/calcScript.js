@@ -1,16 +1,26 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const LOW_ACTIVITY_VAL = 1.2,
-    SMALL_ACTIVITY_VAL = 1.375,
-    MEDIUM_ACTIVITY_VAL = 1.55,
-    HIGH_ACTIVITY_VAL = 1.725;
+  const SMALL_ACTIVITY_VAL = 1.375;
 
-  let sex = 'female',
+  let sex = localStorage.getItem('sex')
+      ? localStorage.getItem('sex')
+      : 'female',
     height,
     weight,
     age,
-    activityLevel = 1.375;
+    activityLevel = localStorage.getItem('activ')
+      ? localStorage.getItem('activ')
+      : SMALL_ACTIVITY_VAL;
 
   const result = document.querySelector('.calculating__result span');
+
+  localStorage.setItem('sex', sex);
+  localStorage.setItem('activ', activityLevel);
+
+  initialActivity('#gender', 'calculating__choose-item_active');
+  initialActivity(
+    '.calculating__choose_big',
+    'calculating__choose-item_active'
+  );
 
   calcCalorie();
 
@@ -20,6 +30,23 @@ window.addEventListener('DOMContentLoaded', () => {
     'calculating__choose-item_active'
   );
   getValFromInput('.calculating__choose_medium');
+
+  function initialActivity(selector, activityClass) {
+    const elements = document.querySelectorAll(`${selector} div`);
+
+    elements.forEach((element) => {
+      const elementData = element.dataset;
+
+      element.classList.remove(activityClass);
+
+      if (
+        elementData.gender === localStorage.getItem('sex') ||
+        elementData.activ === localStorage.getItem('activ')
+      ) {
+        element.classList.add(activityClass);
+      }
+    });
+  }
 
   function calcCalorie() {
     if (!sex || !height || !weight || !age || !activityLevel) {
@@ -47,27 +74,32 @@ window.addEventListener('DOMContentLoaded', () => {
     const elements = document.querySelectorAll(`${parent} div`);
 
     document.querySelector(parent).addEventListener('click', (e) => {
-      const targetData = e.target.dataset;
+      const target = e.target;
 
-      if ('gender' in targetData) {
-        sex = targetData.gender;
+      if (target.dataset.gender) {
+        sex = target.dataset.gender;
+
+        localStorage.setItem('sex', sex);
+
         activitySwitching(activityClass, elements, e.target);
         calcCalorie();
-      } else if ('activ' in targetData) {
-        switch (targetData.activ) {
+      } else if (target.id) {
+        switch (target.id) {
           case 'low':
-            activityLevel = LOW_ACTIVITY_VAL;
+            activityLevel = +target.dataset.activ;
             break;
           case 'small':
-            activityLevel = SMALL_ACTIVITY_VAL;
+            activityLevel = +target.dataset.activ;
             break;
           case 'medium':
-            activityLevel = MEDIUM_ACTIVITY_VAL;
+            activityLevel = +target.dataset.activ;
             break;
           case 'high':
-            activityLevel = HIGH_ACTIVITY_VAL;
+            activityLevel = +target.dataset.activ;
             break;
         }
+
+        localStorage.setItem('activ', target.dataset.activ);
 
         activitySwitching(activityClass, elements, e.target);
         calcCalorie();
@@ -81,6 +113,10 @@ window.addEventListener('DOMContentLoaded', () => {
     elements.forEach((element) => {
       element.addEventListener('input', (e) => {
         const target = e.target;
+
+        target.style.border = target.value.match(/\D/g)
+          ? '1.5px solid red'
+          : 'none';
 
         switch (target.id) {
           case 'height':

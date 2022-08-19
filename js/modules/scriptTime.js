@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+function timer() {
   const deadline = new Date(2022, 6, 21, 17, 34);
 
   const getZero = (num) => (num >= 0 && num < 10 ? `0${num}` : num);
@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (t < 0) {
       const coef = Math.floor(t / (1000 * 60 * 60 * 24));
       //если время выйдет, прибавлем еще сутки
-      t += 1000 * 60 * 60 * 24 * (-coef);
+      t += 1000 * 60 * 60 * 24 * -coef;
     }
 
     days = Math.floor(t / (1000 * 60 * 60 * 24));
@@ -53,4 +53,6 @@ window.addEventListener('DOMContentLoaded', () => {
       seconds.innerHTML = getZero(t.seconds);
     }
   }
-});
+}
+
+module.exports = timer;

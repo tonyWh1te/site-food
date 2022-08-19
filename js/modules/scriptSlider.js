@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+function slider() {
   const slider = document.querySelector('.offer__slider'),
     slides = slider.querySelectorAll('.offer__slide'),
     sliderCounter = slider.querySelector('.offer__slider-counter'),
@@ -43,28 +43,30 @@ window.addEventListener('DOMContentLoaded', () => {
     dots.push(dot);
   }
 
-  const changeOpacity = index => {
+  const changeOpacity = (index) => {
     dots.forEach((dot) => (dot.style.opacity = '.5'));
     dots[index - 1].style.opacity = '1';
   };
 
-  dots.forEach(dot => dot.addEventListener(('click'), (e) => {
-    const slideIndex = e.target.getAttribute('data-slide-to');
+  dots.forEach((dot) =>
+    dot.addEventListener('click', (e) => {
+      const slideIndex = e.target.getAttribute('data-slide-to');
 
-    slideNum = slideIndex;
-    offset = getWidthSlide(width) * (slideNum - 1);
+      slideNum = slideIndex;
+      offset = getWidthSlide(width) * (slideNum - 1);
 
-    slidesField.style.transform = `translateX(-${offset}px)`;
-    
-    changeOpacity(slideIndex);
-    
-    slideCounter(curSlide, slideIndex);
-  }));
+      slidesField.style.transform = `translateX(-${offset}px)`;
+
+      changeOpacity(slideIndex);
+
+      slideCounter(curSlide, slideIndex);
+    })
+  );
 
   const slideCounter = (element, count) =>
     (element.textContent = count >= 10 ? `${count}` : `0${count}`);
-  
-  const getWidthSlide = str => +str.replace(/[^\d.]/g, '');
+
+  const getWidthSlide = (str) => +str.replace(/[^\d.]/g, '');
 
   btNext.addEventListener('click', () => {
     slideNum++;
@@ -150,4 +152,6 @@ window.addEventListener('DOMContentLoaded', () => {
   // function slideSwitcher(index) {
   //   showElement(slides, index);
   // }
-});
+}
+
+module.exports = slider;

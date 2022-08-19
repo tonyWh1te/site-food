@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+function calc() {
   const SMALL_ACTIVITY_VAL = 1.375;
 
   let sex = localStorage.getItem('sex')
@@ -134,4 +134,6 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+}
+
+module.exports = calc;

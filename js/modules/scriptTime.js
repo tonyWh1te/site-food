@@ -1,9 +1,7 @@
-function timer() {
-  const deadline = new Date(2022, 6, 21, 17, 34);
-
+function timer(parentSelector, deadline) {
   const getZero = (num) => (num >= 0 && num < 10 ? `0${num}` : num);
 
-  setTime('.timer', deadline);
+  setTime(parentSelector, deadline);
 
   function timing(endTime) {
     let t, days, hours, minutes, seconds;
@@ -55,4 +53,4 @@ function timer() {
   }
 }
 
-module.exports = timer;
+export default timer;

@@ -1,3 +1,5 @@
+import { getResource } from '../services/services';
+
 function cards() {
   class Menu {
     //для шаблонизации элементов меню
@@ -42,17 +44,6 @@ function cards() {
       );
     }
   }
-
-  const getResource = async (url) => {
-    const res = await fetch(url);
-
-    //обрабатываем появление ошибки, так как fetch этого не умеет
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-    }
-
-    return await res.json();
-  };
 
   //сделали гет запрос с помощью библиотеки axios
   //axios.get заменит нам метод getResource
@@ -110,4 +101,4 @@ function cards() {
   //   ).render();
 }
 
-module.exports = cards;
+export default cards;

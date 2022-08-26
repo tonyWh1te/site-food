@@ -8,7 +8,7 @@ function formData(formSelector) {
 
   //небольшое хранилище сообщений которые мы хотим показывать пользователю
   const message = {
-    loading: 'icons/spinner.svg',
+    loading: '../../icons/spinner.svg',
     success: 'Спасибо! Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...',
   };

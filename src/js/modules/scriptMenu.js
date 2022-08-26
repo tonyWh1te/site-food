@@ -47,13 +47,24 @@ function cards() {
 
   //сделали гет запрос с помощью библиотеки axios
   //axios.get заменит нам метод getResource
-  // axios.get('http://localhost:3000/menu')
-  //     .then(data => { //получаем массив объектов
-  //         data.data.forEach(({img, altimg, title, descr, price}) => { //деструктурируем объект
-  //             new Menu(img, altimg, title, descr, price, '.menu .container', 'big').render();
-  //         });
-  //     })
-  //     .catch((e) => alert(e));
+  // axios
+  //   .get('http://localhost:3000/menu')
+  //   .then((data) => {
+  //     //получаем массив объектов
+  //     data.data.forEach(({ src, altimg, title, descr, price }) => {
+  //       //деструктурируем объект
+  //       new Menu(
+  //         src,
+  //         altimg,
+  //         title,
+  //         descr,
+  //         price,
+  //         '.menu .container',
+  //         'big'
+  //       ).render();
+  //     });
+  //   })
+  //   .catch((e) => alert(e));
 
   getResource('http://localhost:3000/menu')
     .then((data) => {

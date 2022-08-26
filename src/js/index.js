@@ -1,3 +1,6 @@
+import '../css/style.css';
+import '../css/style2.css';
+import '../css/style3.css';
 import calc from './modules/calcScript';
 import formData from './modules/formData';
 import cards from './modules/scriptMenu';
